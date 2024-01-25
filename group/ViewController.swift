@@ -1,22 +1,68 @@
+//
+//  ViewController.swift
+//  group
+//
+//  Created by Андрей on 24.01.2024.
+//
+
 import UIKit
 
 class ViewController: UIViewController {
     
-    var redView: UIView!
-    var blueView: UIView!
-    var textOne = UILabel()
-    var textTwo = UILabel()
-    var labelOne = UILabel()
-    var labelTwo = UILabel()
-    var labelThree = UILabel()
+    lazy var redView: UIView = {
+        let redView = UIView()
+        redView.translatesAutoresizingMaskIntoConstraints = false
+        redView.backgroundColor = .red
+        return redView
+    }()
+    lazy var blueView: UIView = {
+        let blueView = UIView()
+        blueView.translatesAutoresizingMaskIntoConstraints = false
+        blueView.backgroundColor = .blue
+        return blueView
+    }()
+    lazy var textOne: UILabel = {
+        let textOne = UILabel()
+        textOne.text = "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+        textOne.numberOfLines = 0
+        textOne.lineBreakMode = .byWordWrapping
+        textOne.translatesAutoresizingMaskIntoConstraints = false
+        textOne.font = UIFont.boldSystemFont(ofSize: 18)
+        return textOne
+    }()
+    lazy var textTwo: UILabel = {
+        let textTwo = UILabel()
+        textTwo.text = "ooooooooooooooooooooooooooooooooooooooooo"
+        textTwo.translatesAutoresizingMaskIntoConstraints = false
+        textTwo.font = UIFont.boldSystemFont(ofSize: 18)
+        return textTwo
+    }()
+    lazy var labelOne: UILabel = {
+        let labelOne = UILabel()
+        labelOne.text = "gggggggggggggggggggggggggggggggggggggggggg"
+        labelOne.translatesAutoresizingMaskIntoConstraints = false
+        labelOne.font = UIFont.boldSystemFont(ofSize: 18)
+        return labelOne
+    }()
+    lazy var labelTwo: UILabel = {
+        let labelTwo = UILabel()
+        labelTwo.text = "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
+        labelTwo.numberOfLines = 0
+        labelTwo.lineBreakMode = .byWordWrapping
+        labelTwo.translatesAutoresizingMaskIntoConstraints = false
+        labelTwo.font = UIFont.boldSystemFont(ofSize: 18)
+        return labelTwo
+    }()
+    lazy var labelThree: UILabel = {
+        let labelThree = UILabel()
+        labelThree.text = "hhhhhhhhhhhhhhhhhhhhhh"
+        labelThree.translatesAutoresizingMaskIntoConstraints = false
+        labelThree.font = UIFont.boldSystemFont(ofSize: 18)
+        labelThree.textAlignment = .right
+        return labelThree
+    }()
     
-    override func loadView() {
-        view = UIView()
-        view.backgroundColor = .white
-        
-    }
-    
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    lazy var regularConstraint: Array = {
         
         let regularConstraint = [
             
@@ -28,11 +74,15 @@ class ViewController: UIViewController {
             blueView.topAnchor.constraint(equalTo: redView.bottomAnchor,constant: 16),
             blueView.widthAnchor.constraint(equalTo: view.layoutMarginsGuide.widthAnchor, multiplier: 50),
             blueView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: 16),
-            
-            
         ]
         
+        return regularConstraint
+    }()
+    
+    lazy var compactConstraints: Array = {
+        
         let compactConstraints = [
+
             redView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 16),
             redView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 16),
             redView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -16),
@@ -44,85 +94,47 @@ class ViewController: UIViewController {
             blueView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 16),
             blueView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: 16),
             blueView.heightAnchor.constraint(equalTo: view.layoutMarginsGuide.heightAnchor, multiplier: 0.5, constant: -16),
-            
         ]
         
-        
-        
+        return compactConstraints
+    }()
     
-    if traitCollection.horizontalSizeClass == .compact {
-        NSLayoutConstraint.deactivate(regularConstraint)
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         
-        NSLayoutConstraint.activate(compactConstraints)
-       
-    } else if traitCollection.horizontalSizeClass == .regular {
-        
-        NSLayoutConstraint.deactivate(compactConstraints)
-        
-        NSLayoutConstraint.activate(regularConstraint)
-       
-    }
+        if traitCollection.horizontalSizeClass == .compact {
+            NSLayoutConstraint.deactivate(regularConstraint)
+            
+            NSLayoutConstraint.activate(compactConstraints)
+           
+        } else if traitCollection.horizontalSizeClass == .regular {
+            
+            NSLayoutConstraint.deactivate(compactConstraints)
+            
+            NSLayoutConstraint.activate(regularConstraint)
+           
+        }
+    
    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        redView = UIView()
-        redView.translatesAutoresizingMaskIntoConstraints = false
-        redView.backgroundColor = .red
+        view.backgroundColor = .white
+    
         view.addSubview(redView)
-        
-        blueView = UIView()
-        blueView.translatesAutoresizingMaskIntoConstraints = false
-        blueView.backgroundColor = .blue
         view.addSubview(blueView)
-        
-        textOne.text = "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
-        textOne.numberOfLines = 0
-        textOne.lineBreakMode = .byWordWrapping
-        textOne.translatesAutoresizingMaskIntoConstraints = false
-        textOne.font = UIFont.boldSystemFont(ofSize: 18)
         redView.addSubview(textOne)
-        
-        
-        textTwo.text = "ooooooooooooooooooooooooooooooooooooooooo"
-        textTwo.translatesAutoresizingMaskIntoConstraints = false
-        textTwo.font = UIFont.boldSystemFont(ofSize: 18)
         redView.addSubview(textTwo)
-        
-        labelOne.text = "gggggggggggggggggggggggggggggggggggggggggg"
-        labelOne.translatesAutoresizingMaskIntoConstraints = false
-        labelOne.font = UIFont.boldSystemFont(ofSize: 18)
         blueView.addSubview(labelOne)
-        
-        labelTwo.text = "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
-        labelTwo.numberOfLines = 0
-        labelTwo.lineBreakMode = .byWordWrapping
-        labelTwo.translatesAutoresizingMaskIntoConstraints = false
-        labelTwo.font = UIFont.boldSystemFont(ofSize: 18)
         blueView.addSubview(labelTwo)
-        
-        labelThree.text = "hhhhhhhhhhhhhhhhhhhhhh"
-        labelThree.translatesAutoresizingMaskIntoConstraints = false
-        labelThree.font = UIFont.boldSystemFont(ofSize: 18)
-        labelThree.textAlignment = .right
         blueView.addSubview(labelThree)
         
         
+        NSLayoutConstraint.activate(compactConstraints)
         
             NSLayoutConstraint.activate([
-            redView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 16),
-            redView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 16),
-            redView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -16),
-            redView.heightAnchor.constraint(equalTo: view.layoutMarginsGuide.heightAnchor, multiplier: 0.5),
-            
-            
-            blueView.topAnchor.constraint(equalTo: redView.bottomAnchor, constant: 16),
-            blueView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -16),
-            blueView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 16),
-            blueView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: 16),
-            blueView.heightAnchor.constraint(equalTo: view.layoutMarginsGuide.heightAnchor, multiplier: 0.5, constant: -16),
-            
+           
+
             textOne.topAnchor.constraint(equalTo: redView.layoutMarginsGuide.topAnchor, constant: 16),
             textOne.leadingAnchor.constraint(equalTo: redView.layoutMarginsGuide.leadingAnchor, constant: 16),
             textOne.trailingAnchor.constraint(equalTo: redView.layoutMarginsGuide.trailingAnchor, constant: -16),
@@ -161,4 +173,3 @@ class ViewController: UIViewController {
     }
     
 }
-

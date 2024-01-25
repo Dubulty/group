@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  group
-//
-//  Created by Андрей Коновалов on 24.01.2024.
-//
-
 import UIKit
 
 @main
