@@ -1,7 +1,4 @@
 //
-//  ViewController.swift
-//  group
-//
 //  Created by Андрей on 24.01.2024.
 //
 
