@@ -1,3 +1,5 @@
+// ViewController.swift
+// group
 //
 //  Created by Андрей on 24.01.2024.
 //
@@ -27,6 +29,7 @@ class ViewController: UIViewController {
         firstLabel.lineBreakMode = .byWordWrapping
         firstLabel.translatesAutoresizingMaskIntoConstraints = false
         firstLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        firstLabel.setContentCompressionResistancePriority(.init(rawValue: 400),for: .vertical)
         return firstLabel
     }()
     
@@ -35,6 +38,7 @@ class ViewController: UIViewController {
         secondLabel.text = "ooooooooooooooooooooooooooooooooooooooooo"
         secondLabel.translatesAutoresizingMaskIntoConstraints = false
         secondLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        secondLabel.setContentHuggingPriority(.init(rawValue: 1000),for: .vertical)
         return secondLabel
     }()
     
@@ -53,6 +57,7 @@ class ViewController: UIViewController {
         averageLabel.lineBreakMode = .byWordWrapping
         averageLabel.translatesAutoresizingMaskIntoConstraints = false
         averageLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        averageLabel.setContentCompressionResistancePriority(.init(rawValue: 400), for: .vertical)
         return averageLabel
     }()
     
@@ -62,12 +67,13 @@ class ViewController: UIViewController {
         lowerLabel.translatesAutoresizingMaskIntoConstraints = false
         lowerLabel.font = UIFont.boldSystemFont(ofSize: 18)
         lowerLabel.textAlignment = .right
+        lowerLabel.setContentHuggingPriority(.init(rawValue: 1000), for: .vertical)
         return lowerLabel
     }()
     
     lazy var regularConstraint: [NSLayoutConstraint] = {
-        let regularConstraint = [
-            
+        
+        return [
             redView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             redView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 16),
             redView.widthAnchor.constraint(equalTo: view.layoutMarginsGuide.widthAnchor, multiplier: 50),
@@ -77,12 +83,11 @@ class ViewController: UIViewController {
             blueView.widthAnchor.constraint(equalTo: view.layoutMarginsGuide.widthAnchor, multiplier: 50),
             blueView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: 16),
         ]
-        return regularConstraint
     }()
     
     lazy var compactConstraints: [NSLayoutConstraint] = {
-        let compactConstraints = [
-
+        
+        return [
             redView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 16),
             redView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 16),
             redView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -16),
@@ -94,15 +99,7 @@ class ViewController: UIViewController {
             blueView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: 16),
             blueView.heightAnchor.constraint(equalTo: view.layoutMarginsGuide.heightAnchor, multiplier: 0.5, constant: -16),
         ]
-        return compactConstraints
     }()
-    
-    var contentPriority: Void {
-        firstLabel.setContentCompressionResistancePriority(.init(rawValue: 400),for: .vertical)
-        secondLabel.setContentHuggingPriority(.init(rawValue: 1000),for: .vertical)
-        averageLabel.setContentCompressionResistancePriority(.init(rawValue: 400), for: .vertical)
-        lowerLabel.setContentHuggingPriority(.init(rawValue: 1000), for: .vertical)
-    }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         
@@ -119,7 +116,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        contentPriority
         view.backgroundColor = .white
     
         view.addSubview(redView)
