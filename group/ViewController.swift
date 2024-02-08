@@ -44,7 +44,7 @@ class ViewController: UIViewController {
     
     lazy var upperLabel: UILabel = {
         let upperLabel = UILabel()
-        upperLabel.text = "gggggggggggggggggggggggggggggggggggggggggg"
+        upperLabel.text = "ggggggggggggggggggggggggg"
         upperLabel.translatesAutoresizingMaskIntoConstraints = false
         upperLabel.font = UIFont.boldSystemFont(ofSize: 18)
         return upperLabel
@@ -52,12 +52,11 @@ class ViewController: UIViewController {
     
     lazy var averageLabel: UILabel = {
         let averageLabel = UILabel()
-        averageLabel.text = "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
+        averageLabel.text = "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
         averageLabel.numberOfLines = 0
         averageLabel.lineBreakMode = .byWordWrapping
         averageLabel.translatesAutoresizingMaskIntoConstraints = false
         averageLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        averageLabel.setContentCompressionResistancePriority(.init(rawValue: 400), for: .vertical)
         return averageLabel
     }()
     
@@ -66,9 +65,17 @@ class ViewController: UIViewController {
         lowerLabel.text = "hhhhhhhhhhhhhhhhhhhhhh"
         lowerLabel.translatesAutoresizingMaskIntoConstraints = false
         lowerLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        lowerLabel.textAlignment = .right
-        lowerLabel.setContentHuggingPriority(.init(rawValue: 1000), for: .vertical)
         return lowerLabel
+    }()
+    
+    lazy var stackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [upperLabel, averageLabel, lowerLabel])
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.alignment = .fill
+        stackView.spacing = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
     
     lazy var regularConstraint: [NSLayoutConstraint] = {
@@ -122,9 +129,7 @@ class ViewController: UIViewController {
         view.addSubview(blueView)
         redView.addSubview(firstLabel)
         redView.addSubview(secondLabel)
-        blueView.addSubview(upperLabel)
-        blueView.addSubview(averageLabel)
-        blueView.addSubview(lowerLabel)
+        blueView.addSubview(stackView)
         
             NSLayoutConstraint.activate(compactConstraints)
         
@@ -135,25 +140,15 @@ class ViewController: UIViewController {
             firstLabel.trailingAnchor.constraint(equalTo: redView.layoutMarginsGuide.trailingAnchor, constant: -16),
             firstLabel.bottomAnchor.constraint(equalTo: secondLabel.layoutMarginsGuide.topAnchor, constant: -16),
           
-            secondLabel.topAnchor.constraint(equalTo: firstLabel.layoutMarginsGuide.bottomAnchor, constant: 1),
+            secondLabel.topAnchor.constraint(equalTo: firstLabel.layoutMarginsGuide.bottomAnchor, constant: 16),
             secondLabel.leadingAnchor.constraint(equalTo: redView.layoutMarginsGuide.leadingAnchor, constant: 16),
             secondLabel.trailingAnchor.constraint(equalTo: redView.layoutMarginsGuide.trailingAnchor, constant: -16),
             secondLabel.bottomAnchor.constraint(equalTo: redView.layoutMarginsGuide.bottomAnchor, constant: -16),
             
-            upperLabel.topAnchor.constraint(equalTo: blueView.layoutMarginsGuide.topAnchor, constant: 16),
-            upperLabel.leadingAnchor.constraint(equalTo: blueView.layoutMarginsGuide.leadingAnchor, constant: 16),
-            upperLabel.trailingAnchor.constraint(equalTo: blueView.layoutMarginsGuide.trailingAnchor, constant: -16),
-            upperLabel.bottomAnchor.constraint(equalTo: averageLabel.layoutMarginsGuide.topAnchor, constant: -16),
-            
-            averageLabel.topAnchor.constraint(equalTo: upperLabel.layoutMarginsGuide.bottomAnchor, constant: 16),
-            averageLabel.leadingAnchor.constraint(equalTo: blueView.layoutMarginsGuide.leadingAnchor, constant: 16),
-            averageLabel.trailingAnchor.constraint(equalTo: blueView.layoutMarginsGuide.trailingAnchor, constant: -16),
-            averageLabel.bottomAnchor.constraint(equalTo: lowerLabel.layoutMarginsGuide.topAnchor, constant: -16),
-            
-            lowerLabel.topAnchor.constraint(equalTo: averageLabel.layoutMarginsGuide.bottomAnchor, constant: 16),
-            lowerLabel.leadingAnchor.constraint(equalTo: blueView.layoutMarginsGuide.leadingAnchor, constant: 16),
-            lowerLabel.trailingAnchor.constraint(equalTo: blueView.layoutMarginsGuide.trailingAnchor, constant: -16),
-            lowerLabel.bottomAnchor.constraint(equalTo: blueView.layoutMarginsGuide.bottomAnchor, constant: -16),
+            stackView.topAnchor.constraint(equalTo: blueView.layoutMarginsGuide.topAnchor, constant: 16),
+            stackView.leadingAnchor.constraint(equalTo: blueView.layoutMarginsGuide.leadingAnchor, constant: 16),
+            stackView.trailingAnchor.constraint(equalTo: blueView.layoutMarginsGuide.trailingAnchor, constant: -16),
+            stackView.bottomAnchor.constraint(equalTo: blueView.layoutMarginsGuide.bottomAnchor, constant: -16),
             ])
     }
 }
